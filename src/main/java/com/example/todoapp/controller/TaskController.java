@@ -8,10 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Path;
 import javax.validation.Valid;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -30,6 +28,13 @@ class TaskController {
         return ResponseEntity.ok(repository.findAll(page).getContent());
     }
 
+    @GetMapping("/tasks/{id}")
+    ResponseEntity<Task> readTask(@PathVariable int id) {
+        return repository.findById(id).
+                map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping(value = "/tasks", params = {"!sort", "!page", "!size"})
     ResponseEntity<List<Task>> readAllTasks() {
         logger.warn("Exposing all the tasks");
@@ -44,13 +49,6 @@ class TaskController {
         toUpdate.setId(id);
         repository.save(toUpdate);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/tasks/{id}")
-    ResponseEntity<Task> readTask(@PathVariable int id) {
-        return repository.findById(id).
-                map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/tasks")
