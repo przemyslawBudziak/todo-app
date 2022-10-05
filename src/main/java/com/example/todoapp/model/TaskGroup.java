@@ -2,22 +2,20 @@ package com.example.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tasks")
-public class Task {
+@Table(name = "tasks_groups")
+public class TaskGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank(message = "No valid task description")
+    @NotBlank(message = "No valid task group description")
     private String description;
     private boolean done;
-    private LocalDateTime deadline;
     @Embedded
     private Audit audit = new Audit();
 
-    public Task() {
+    public TaskGroup() {
     }
 
     public int getId() {
@@ -42,20 +40,6 @@ public class Task {
 
     public void setDone(boolean done) {
         this.done = done;
-    }
-
-    public LocalDateTime getDeadline() {
-        return deadline;
-    }
-
-    void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
-    }
-
-    public void updateFrom(final Task source) {
-        description = source.description;
-        done = source.done;
-        deadline = source.deadline;
     }
 
 }
