@@ -8,4 +8,4 @@ spring:
       'jdbc:h2:file:./todo-db'
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate

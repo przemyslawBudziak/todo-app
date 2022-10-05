@@ -2,6 +2,7 @@ package com.example.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -12,6 +13,9 @@ public class Task {
     @NotBlank(message = "No valid task description")
     private String description;
     private boolean done;
+    private LocalDateTime deadline;
+    private LocalDateTime createdOn;
+    private LocalDateTime updatedOn;
 
     public Task() {
     }
@@ -20,7 +24,7 @@ public class Task {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
@@ -36,7 +40,32 @@ public class Task {
         return done;
     }
 
-    void setDone(boolean done) {
+    public void setDone(boolean done) {
         this.done = done;
     }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
+    @PrePersist
+    void prePersist() {
+        createdOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preMerge() {
+        updatedOn = LocalDateTime.now();
+    }
+
+    public void updateFrom(final Task source) {
+        description = source.description;
+        done = source.done;
+        deadline = source.deadline;
+    }
+
 }
