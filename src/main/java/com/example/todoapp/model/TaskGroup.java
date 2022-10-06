@@ -2,6 +2,7 @@ package com.example.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "tasks_groups")
@@ -12,8 +13,8 @@ public class TaskGroup {
     @NotBlank(message = "No valid task group description")
     private String description;
     private boolean done;
-    @Embedded
-    private Audit audit = new Audit();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private Set<Task> tasks;
 
     public TaskGroup() {
     }
@@ -42,4 +43,11 @@ public class TaskGroup {
         this.done = done;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 }
