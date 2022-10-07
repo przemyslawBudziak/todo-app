@@ -2,26 +2,19 @@ package com.example.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
-@Table(name = "tasks_groups")
-public class TaskGroup {
+@Table(name = "project_steps")
+public class ProjectStep {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank(message = "No valid task group description")
+    @NotBlank(message = "No valid description")
     private String description;
-    private boolean done;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-    private Set<Task> tasks;
-
+    private int daysToDeadline;
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
-
-    public TaskGroup() {
-    }
 
     public int getId() {
         return id;
@@ -39,20 +32,12 @@ public class TaskGroup {
         this.description = description;
     }
 
-    public boolean isDone() {
-        return done;
+    public int getDaysToDeadline() {
+        return daysToDeadline;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    void setDaysToDeadline(int daysToDeadline) {
+        this.daysToDeadline = daysToDeadline;
     }
 
     Project getProject() {
