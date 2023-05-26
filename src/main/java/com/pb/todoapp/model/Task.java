@@ -1,18 +1,19 @@
 package com.pb.todoapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
 
-    public Task() {
+    Task() {
     }
 
     public int getId() {
@@ -27,7 +28,7 @@ public class Task {
         return description;
     }
 
-    public void setDescription(final String description) {
+    void setDescription(final String description) {
         this.description = description;
     }
 
@@ -35,7 +36,7 @@ public class Task {
         return done;
     }
 
-    public void setDone(final boolean done) {
+    void setDone(final boolean done) {
         this.done = done;
     }
 }
