@@ -1,4 +1,4 @@
-package com.example.todoapp.model;
+package com.pb.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class Task{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank(message = "No valid task description")
+    @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
     private LocalDateTime deadline;
@@ -20,14 +20,14 @@ public class Task {
     @JoinColumn(name = "task_group_id")
     private TaskGroup group;
 
-    public Task() {
+    Task() {
     }
 
     public int getId() {
         return id;
     }
 
-    void setId(int id) {
+    void setId(final int id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class Task {
         return description;
     }
 
-    void setDescription(String description) {
+    void setDescription(final String description) {
         this.description = description;
     }
 
@@ -43,7 +43,7 @@ public class Task {
         return done;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(final boolean done) {
         this.done = done;
     }
 
@@ -51,16 +51,8 @@ public class Task {
         return deadline;
     }
 
-    void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
-    }
-
-    public TaskGroup getGroup() {
-        return group;
-    }
-
-    public void setGroup(TaskGroup group) {
-        this.group = group;
     }
 
     public void updateFrom(final Task source) {
@@ -69,5 +61,4 @@ public class Task {
         deadline = source.deadline;
         group = source.group;
     }
-
 }

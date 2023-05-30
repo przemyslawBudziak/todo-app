@@ -1,4 +1,4 @@
-package com.example.todoapp.model;
+package com.pb.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ public class ProjectStep {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank(message = "No valid description")
+    @NotBlank(message = "Project steps description must not be empty")
     private String description;
     private int daysToDeadline;
     @ManyToOne
@@ -40,11 +40,11 @@ public class ProjectStep {
         this.daysToDeadline = daysToDeadline;
     }
 
-    Project getProject() {
+    public Project getProject() {
         return project;
     }
 
-    void setProject(Project project) {
+    public void setProject(Project project) {
         this.project = project;
     }
 }

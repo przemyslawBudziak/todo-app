@@ -1,4 +1,4 @@
-package com.example.todoapp.model;
+package com.pb.todoapp.model;
 
 import java.util.List;
 import java.util.Optional;

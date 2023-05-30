@@ -1,16 +1,16 @@
-package com.example.todoapp.model;
+package com.pb.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
-@Table(name = "tasks_groups")
-public class TaskGroup {
+@Table(name = "task_groups")
+public class TaskGroup{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank(message = "No valid task group description")
+    @NotBlank(message = "Task group's description must not be empty")
     private String description;
     private boolean done;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
@@ -20,14 +20,14 @@ public class TaskGroup {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    public TaskGroup() {
+    TaskGroup() {
     }
 
     public int getId() {
         return id;
     }
 
-    void setId(int id) {
+    void setId(final int id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class TaskGroup {
         return description;
     }
 
-    void setDescription(String description) {
+    void setDescription(final String description) {
         this.description = description;
     }
 
@@ -43,7 +43,7 @@ public class TaskGroup {
         return done;
     }
 
-    public void setDone(boolean done) {
+    void setDone(final boolean done) {
         this.done = done;
     }
 
@@ -55,7 +55,7 @@ public class TaskGroup {
         this.tasks = tasks;
     }
 
-    Project getProject() {
+    public Project getProject() {
         return project;
     }
 

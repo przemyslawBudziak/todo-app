@@ -1,4 +1,4 @@
-package com.example.todoapp.model;
+package com.pb.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +10,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank(message = "No valid description")
+    @NotBlank(message = "Project description must not be empty")
     private String description;
     @OneToMany(mappedBy = "project")
     private Set<TaskGroup> groups;
@@ -33,7 +33,7 @@ public class Project {
         this.description = description;
     }
 
-    Set<TaskGroup> getGroups() {
+    public Set<TaskGroup> getGroups() {
         return groups;
     }
 
