@@ -20,7 +20,7 @@ public class TaskGroup{
     @JoinColumn(name = "project_id")
     private Project project;
 
-    TaskGroup() {
+    public TaskGroup() {
     }
 
     public int getId() {
@@ -35,7 +35,7 @@ public class TaskGroup{
         return description;
     }
 
-    void setDescription(final String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -43,7 +43,7 @@ public class TaskGroup{
         return done;
     }
 
-    void setDone(final boolean done) {
+    public void setDone(final boolean done) {
         this.done = done;
     }
 
@@ -51,7 +51,7 @@ public class TaskGroup{
         return tasks;
     }
 
-    void setTasks(Set<Task> tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 
